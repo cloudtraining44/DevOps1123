@@ -1,10 +1,10 @@
 variable "access_key" {
-			  default = "AKIAXVQSCPJ6DVH2OGEN"
+			  default = ""
 			  type = string
 			}
 
 			variable "secret_key" {
-			  default = "Nty8KwFyLkfc8zd79vlCmHkf7q0l66Lg3bRo3Lpu"
+			  default = ""
 			  type = string
 			}
 
