@@ -1,10 +1,10 @@
 variable "access_key" {
-  default = ""
+  default = "AKIA44EQJ67T5BA3LCPO"
   type = string
 }
 
 variable "secret_key" {
-  default = ""
+  default = "3VzxBfRlFn5WNdZ5h8iZ+B7mZFCGFZUZfQRLlIYY"
   type = string
 }
 
@@ -13,6 +13,7 @@ variable "ami" {
   type = string
 }
 
+/*
 variable "instance_type" {
   
 }
@@ -28,3 +29,4 @@ variable "Owner" {
 variable "sgname" {
   
 }
+*/
