@@ -4,7 +4,7 @@ resource "aws_instance" "demo-instance" {
   ami                    = "ami-0759f51a90924c166"
   instance_type          = "t2.micro"
 #  key_name               = "demokp"
-  vpc_security_group_ids = [aws_security_group.web-sg-01.id]
+  vpc_security_group_ids = [aws_security_group.web-sg-02.id]
   user_data              = "${file("userdata_web.sh")}"
   tags = {
     Name  = "sohail-webserver"
@@ -13,9 +13,9 @@ resource "aws_instance" "demo-instance" {
 }
 
 #Security Group Resource to open port 80 
-resource "aws_security_group" "web-sg-01" {
-  name        = "Web-SG-01"
-  description = "Web-SG-01"
+resource "aws_security_group" "web-sg-02" {
+  name        = "Web-SG-02"
+  description = "Web-SG-02"
 
   dynamic ingress {
     for_each = var.port
