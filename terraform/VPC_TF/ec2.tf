@@ -5,7 +5,7 @@ resource "aws_instance" "webserver" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg-01.id]
   user_data              = "${file("userdata_web.sh")}"
-  subnet_id              = "subnet-0e2f2d482271aa409"
+  subnet_id              = aws_subnet.public-sn.id
     associate_public_ip_address = true
 
   tags = {
@@ -18,7 +18,7 @@ resource "aws_instance" "app-server" {
   ami                    = "ami-0759f51a90924c166"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg-01.id]
-  subnet_id              = "subnet-063753a6689833284"
+  subnet_id              = aws_subnet.private-sn.id
 
   tags = {
     Name  = "${var.Name}-App-01"
@@ -30,7 +30,7 @@ resource "aws_instance" "app-server" {
 resource "aws_security_group" "web-sg-01" {
   name        = "${var.Name}-SG"
   description = "Web-SG-01"
-  vpc_id      = "vpc-0a4ae9b5ffd510117"
+  vpc_id      = aws_vpc.main.id
 
   ingress {
     description      = "Port 80 from Everywhere"
