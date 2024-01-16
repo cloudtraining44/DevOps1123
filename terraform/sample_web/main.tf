@@ -6,7 +6,7 @@ resource "aws_instance" "demo-instance" {
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   user_data              = "${file("userdata_web.sh")}"
   tags = {
-    Name  = "sohail-webserver"
+    Name  = "${var.Name}-webserver"
     Owner = "Terraform"
   }
 }
