@@ -3,18 +3,18 @@
 resource "aws_instance" "demo-instance" {
   ami                    = "ami-0759f51a90924c166"
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.web-sg.id]
+  vpc_security_group_ids = ["sg-0f97a9249d36113cd"]
   user_data              = "${file("userdata_web.sh")}"
   tags = {
     Name  = "sohail-webserver"
     Owner = "Terraform"
   }
 }
-
+/*
 #Security Group Resource to open port 80 
 resource "aws_security_group" "web-sg" {
-  name        = "Web-SG"
-  description = "Web-SG"
+  name        = "Web-SG-1"
+  description = "Web-SG-1"
 
   dynamic ingress {
     for_each = var.port
@@ -35,7 +35,7 @@ resource "aws_security_group" "web-sg" {
     cidr_blocks      = ["0.0.0.0/0"]
   }
 }
-
+*/
 output "public_ip" {
   value = aws_instance.demo-instance.public_ip
 }
