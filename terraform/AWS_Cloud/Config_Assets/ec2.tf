@@ -1,4 +1,9 @@
 #EC2 instance using UserData
+provider "aws" {
+  region = "us-east-1"
+  access_key = var.access_key
+  secret_key = var.secret_access_key
+}
 
 resource "aws_instance" "webserver" {
   ami                    = "ami-0759f51a90924c166"
