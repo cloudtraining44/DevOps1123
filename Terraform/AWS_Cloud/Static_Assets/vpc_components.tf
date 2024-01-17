@@ -9,7 +9,7 @@ resource "aws_vpc" "main" {
   instance_tenancy = "default"
 
   tags = {
-    Name = "vpc-01"
+    Name = "${var.Env}-vpc"
   }
 }
 
@@ -18,7 +18,7 @@ resource "aws_subnet" "public-sn" {
   cidr_block = "10.0.1.0/24"
 
   tags = {
-    Name = "Public Subnet"
+    Name = "${var.Env}-PublicSubnet"
   }
 }
 
@@ -27,7 +27,7 @@ resource "aws_subnet" "private-sn" {
   cidr_block = "10.0.2.0/24"
 
   tags = {
-    Name = "Private Subnet"
+    Name = "${var.Env}-PrivateSubnet"
   }
 }
 
@@ -35,7 +35,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
-    Name = "IGW-01"
+    Name = "${var.Env}-IGW"
   }
 }
 
@@ -48,7 +48,7 @@ resource "aws_nat_gateway" "nat_gateway" {
   subnet_id     = aws_subnet.public-sn.id
 
   tags = {
-    Name = "NAT-GW"
+    Name = "${var.Env}-NAT-GW"
   }
 
 }
@@ -62,7 +62,7 @@ resource "aws_route_table" "private-rt" {
   }
 
   tags = {
-    Name = "private-rt"
+    Name = "${var.Env}-private-rt"
   }
 
   depends_on = [ aws_nat_gateway.nat_gateway ]
@@ -82,7 +82,7 @@ resource "aws_route_table" "public-rt" {
   }
 
   tags = {
-    Name = "public-rt"
+    Name = "${var.Env}-public-rt"
   }
 }
 

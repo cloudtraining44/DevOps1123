@@ -11,7 +11,7 @@ pipeline {
         stage ("terraform init") {
             steps {
                 sh '''
-                cd Terraform/VPC_tf
+                cd terraform/AWS_Cloud/Static_Assets
                 ls -l
                 terraform init
                 '''
@@ -21,9 +21,9 @@ pipeline {
         stage ("plan") {
             steps {
                 sh '''
-                cd Terraform/VPC_tf
+                cd terraform/AWS_Cloud/Static_Assets
                 ls -l
-                terraform plan -var "Name=$Name" -var="access_key=${access_key}" -var="secret_access_key=${secret_access_key}"
+                terraform plan -var="Env=${Env}" -var="access_key=${access_key}" -var="secret_access_key=${secret_access_key}"
                 '''
             }
         }
@@ -32,9 +32,9 @@ pipeline {
             steps {
                 sh '''
                 echo "Terraform action is --> ${action}"
-                cd Terraform/VPC_tf
+                cd terraform/AWS_Cloud/Static_Assets
                 ls -l
-                terraform ${action} -auto-approve -var "Name=$Name" -var="access_key=${access_key}" -var="secret_access_key=${secret_access_key}"
+                terraform ${action} -auto-approve -var="Env=${Env}" -var="access_key=${access_key}" -var="secret_access_key=${secret_access_key}"
                 '''
            }
         }
