@@ -5,7 +5,7 @@ resource "aws_instance" "webserver" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg-01.id]
   user_data              = "${file("userdata_web.sh")}"
-  subnet_id              = aws_subnet.public-sn.id
+  subnet_id              = "subnet-08ae094d0d8474b10"
     associate_public_ip_address = true
 
   tags = {
@@ -18,7 +18,7 @@ resource "aws_instance" "app-server" {
   ami                    = "ami-0759f51a90924c166"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg-01.id]
-  subnet_id              = aws_subnet.private-sn.id
+  subnet_id              = "subnet-084caac5afb133769"
 
   tags = {
     Name  = "${var.Name}-App-01"
@@ -26,11 +26,18 @@ resource "aws_instance" "app-server" {
   }
 }
 
+data "aws_vpc" "vpc_lookup" {
+  filter {
+    name   = "tag:Name"
+    values = ["${Env}-vpc"]
+  }
+}
+
 #Security Group Resource to open port 80 
 resource "aws_security_group" "web-sg-01" {
   name        = "${var.Name}-SG"
   description = "Web-SG-01"
-  vpc_id      = aws_vpc.main.id
+  vpc_id      = data.aws_vpc.vpc_lookup.id
 
   ingress {
     description      = "Port 80 from Everywhere"
