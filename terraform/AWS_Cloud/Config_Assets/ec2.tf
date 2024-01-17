@@ -9,7 +9,7 @@ resource "aws_instance" "webserver" {
     associate_public_ip_address = true
 
   tags = {
-    Name  = "${var.Name}-Web-01"
+    Name  = "${var.Env}-Web-01"
     Owner = "Terraform"
   }
 }
@@ -21,7 +21,7 @@ resource "aws_instance" "app-server" {
   subnet_id              = "subnet-084caac5afb133769"
 
   tags = {
-    Name  = "${var.Name}-App-01"
+    Name  = "${var.Env}-App-01"
     Owner = "Terraform"
   }
 }
@@ -35,7 +35,7 @@ data "aws_vpc" "vpc_lookup" {
 
 #Security Group Resource to open port 80 
 resource "aws_security_group" "web-sg-01" {
-  name        = "${var.Name}-SG"
+  name        = "${var.Env}-SG"
   description = "Web-SG-01"
   vpc_id      = data.aws_vpc.vpc_lookup.id
 
