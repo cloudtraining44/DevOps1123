@@ -4,7 +4,7 @@ variable "secret_access_key" {}
 
 variable "Env" {}
 
-variable "subnet_id" {}
+variable "data.aws_subnet.public.id" {}
 
 variable "port" {
   type = list

@@ -10,7 +10,7 @@ resource "aws_instance" "webserver" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg-01.id]
   user_data              = "${file("userdata_web.sh")}"
-  subnet_id              = "var.subnet_id"
+  subnet_id              = "data.aws_subnet.public.id"
     associate_public_ip_address = true
 
   tags = {
@@ -23,7 +23,7 @@ resource "aws_instance" "app-server" {
   ami                    = "ami-0759f51a90924c166"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg-01.id]
-  subnet_id              = "var.subnet_id"
+  subnet_id              = "data.aws_subnet.public.id"
 
   tags = {
     Name  = "${var.Env}-App-01"
@@ -35,6 +35,13 @@ data "aws_vpc" "vpc_lookup" {
   filter {
     name   = "tag:Name"
     values = ["${var.Env}-vpc"]
+  }
+}
+
+data "aws_subnet" "public" {
+  filter {
+    name   = "tag:Name"
+    values = ["${var.Env}-PublicSubnet"]
   }
 }
 
