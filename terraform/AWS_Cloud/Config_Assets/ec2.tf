@@ -29,7 +29,7 @@ resource "aws_instance" "app-server" {
 data "aws_vpc" "vpc_lookup" {
   filter {
     name   = "tag:Name"
-    values = ["${Env}-vpc"]
+    values = ["${var.Env}-vpc"]
   }
 }
 
