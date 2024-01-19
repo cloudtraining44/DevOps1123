@@ -6,15 +6,15 @@ resource "aws_instance" "demo-instance" {
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   user_data              = "${file("userdata_web.sh")}"
   tags = {
-    Name  = "${var.Name}-webserver"
+    Name  = "${var.Env}-WebServer"
     Owner = "Terraform"
   }
 }
 
 #Security Group Resource to open port 80 
 resource "aws_security_group" "web-sg" {
-  name        = "Web-SG"
-  description = "Web-SG"
+  name        = "${var.Env}-Web-SG"
+  description = "${var.Env}-Web-SG"
 
   dynamic ingress {
     for_each = var.port

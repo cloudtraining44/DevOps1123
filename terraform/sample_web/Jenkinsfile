@@ -23,7 +23,7 @@ pipeline {
                 sh '''
                 cd terraform/sample_web
                 ls -l
-                terraform plan -var "Name=$Name" -var="access_key=${access_key}" -var="secret_access_key=${secret_access_key}"
+                terraform plan -var "Env=$Env" -var="access_key=${access_key}" -var="secret_access_key=${secret_access_key}"
                 '''
             }
         }
@@ -34,7 +34,7 @@ pipeline {
                 echo "Terraform action is --> ${action}"
                 cd terraform/sample_web
                 ls -l
-                terraform ${action} -auto-approve -var "Name=$Name" -var="access_key=${access_key}" -var="secret_access_key=${secret_access_key}"
+                terraform ${action} -auto-approve -var "Env=$Env" -var="access_key=${access_key}" -var="secret_access_key=${secret_access_key}"
                 '''
            }
         }
