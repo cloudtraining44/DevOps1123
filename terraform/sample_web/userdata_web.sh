@@ -8,8 +8,8 @@ cat << 'EOF' > /var/www/html/index.html
 <html>
 <body>
 
-<h1>Welcome web02 webserver </h1>
-<p>You are in web02.</p>
+<h1>Welcome demo webserver </h1>
+<p>You are in demo class.</p>
 
 </body>
 </html>
