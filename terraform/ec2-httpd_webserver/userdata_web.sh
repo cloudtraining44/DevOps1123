@@ -8,7 +8,7 @@ cat << 'EOF' > /var/www/html/index.html
 <html>
 <body>
 
-<h1>Welcome demo webserver </h1>
+<h1>Welcome demo webserver created via Jenkins </h1>
 <p>You are in demo class.</p>
 
 </body>
