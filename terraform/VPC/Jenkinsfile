@@ -11,7 +11,7 @@ pipeline {
         stage ("terraform init") {
             steps {
                 sh '''
-                cd terraform/EKS
+                cd terraform/VPC
                 ls -l
                 terraform init
                 '''
@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Terraform action is --> ${action}"
-                cd terraform/EKS
+                cd terraform/VPC
                 ls -l
                 terraform ${action} -auto-approve -var "Env=$Env" -var="access_key=${access_key}" -var="secret_access_key=${secret_access_key}"
                 '''
