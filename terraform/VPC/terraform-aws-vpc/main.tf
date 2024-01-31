@@ -1040,7 +1040,7 @@ locals {
 resource "aws_eip" "nat" {
   count = local.create_vpc && var.enable_nat_gateway && !var.reuse_nat_ips ? local.nat_gateway_count : 0
 
-  domain = "vpc"
+#  domain = "vpc"
 
   tags = merge(
     {
